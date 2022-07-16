@@ -1,6 +1,5 @@
 # react
-## desarrollo de las prácticas del curso "React" de Cecilio Alvarez
-
+## desarrollo de las prácticas del curso "React" de Cecilio
 ### Notas
 
 [1] Al usar las librerías mas recientes de UNPKG he tenido que cambiar la sintáxis de uso de ReactDOM.render por ReactDom.createRoot(...
