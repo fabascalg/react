@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React mod2/004/</title>
+    <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+    <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script>
+        window.onload = function () {
+            document.getElementById('encabezado').innerText = document.title;
+        }
+    </script>
+    <style type="text/css">
+        body {
+            background-color: antiquewhite;
+        }
+
+        #encabezado {
+            text-align: center;
+            font-size: large;
+            color: blue;
+        }
+        #menu li{
+            float: left;
+            display:block;
+            width: 50px;
+            background-color: blanchedalmond;
+            margin-left: 2px;
+
+        }
+        #quitarfloat{
+            float:none;
+        }
+
+        .estiloLista{
+            color:coral;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }        
+    </style>
+</head>
+
+<body>
+    <div id='encabezado'> </div>
+    <div id="zona">
+        <p>zona cero</p>
+    </div>
+    <script type="text/babel">
+        class Alumno {
+            constructor(nombre,nota){
+                this.nombre = nombre
+                this.nota = nota
+            }
+        }
+        class Fila extends React.Component{
+            render(){
+                return <li>{this.props.alumno.nombre}, {this.props.alumno.nota}</li>
+            }
+        }
+        class Lista extends React.Component {
+            render() {
+                return <ul>
+                    {this.props.items.map((item)=><Fila key={item.nombre} alumno={item}/>)}
+                </ul>
+            }
+        }
+    </script>
+    <script type="text/babel">
+        let a1 = new Alumno("Pedro",10);
+        let a2 = new Alumno("Gloria",3);
+        let lista = [a1,a2];
+
+        var listas = <div>
+            <Lista items={lista} />
+        </div>
+
+        var root = ReactDOM.createRoot(document.getElementById("zona"))
+        root.render(listas)
+    </script>
+    <div id='abajo'>
+        <ul id="menu">
+            <li><a href="../modulo1/001.html">1/001</a></li>
+            <li><a href="../modulo1/002.html">1/002</a></li>
+            <li><a href="../modulo1/003.html">1/003</a></li>
+            <li><a href="../modulo1/004.html">1/004</a></li>
+            <li><a href="../modulo1/005.html">1/005</a></li>
+            <li><a href="../modulo1/006.html">1/006</a></li>
+            <li><a href="../modulo2/001.html">2/001</a></li>
+            <li><a href="../modulo2/002.html">2/002</a></li>
+            <li><a href="../modulo2/003.html">2/003</a></li>
+            <li><a href="../modulo2/004.html">2/004</a></li>
+            <li><a href="../modulo2/005.html">2/005</a></li>
+            <li><a href="../modulo2/006.html">2/006</a></li>
+            <li><a href="../modulo3/001.html">3/001</a></li>
+            <li><a href="../modulo3/002.html">3/002</a></li>
+            <li><a href="../modulo3/003.html">3/003</a></li>
+            <li><a href="../modulo3/004.html">3/004</a></li>
+            <li><a href="../modulo3/005.html">3/005</a></li>
+            <li><a href="../modulo3/006.html">3/006</a></li>
+        </ul>
+    </div>
+    <div id="quitarfloat"></div>
+</body>
+
+</html>
