@@ -49,6 +49,16 @@
         .invalido{
             color:red
         }
+        .estiloCirculo{
+            height: 20px;
+            width: 20px;
+            background-color: green;
+            border-radius: 50%;
+            display: inline-block;
+            border: 0px;
+            margin: 0px;
+            margin-left: 5px;
+        }
     </style>
 </head>
 
@@ -74,7 +84,7 @@
             onMas:PropTypes.func.isRequired,
             onMenos:PropTypes.func.isRequired
         }
-        class CajaRango extends React.Component {
+        class CajaRangoCirculo extends React.Component {
             constructor(props) {
                 super(props)
                 this.state = {
@@ -84,6 +94,13 @@
                 this.decrementar=this.decrementar.bind(this)
                 this.estilo=this.estilo.bind(this)
 
+            }
+            dibujarCirculos(){
+                let circulos=[];
+                for (let i=0;i<this.state.valor;i++){
+                    circulos.push(<span key={i} className={this.props.formato}>&nbsp;</span>);
+                }
+                return circulos;
             }
             incrementar(){
                 this.setState({
@@ -105,22 +122,24 @@
             }
             render() {
                 return <div>
+                    {this.dibujarCirculos()}
                     <span className={this.estilo()}>{this.state.valor}</span>
                     <Botonera onMas = {this.incrementar} onMenos = {this.decrementar}/>
                 </div>
             }
         }
-        CajaRango.propTypes={
+        CajaRangoCirculo.propTypes={
             valor: PropTypes.number.isRequired,
             max: PropTypes.number.isRequired,
             min: PropTypes.number.isRequired,
             valorOk: PropTypes.number,
             classOK: PropTypes.string,
-            classNoOk: PropTypes.string
+            classNoOk: PropTypes.string,
+            formato: PropTypes.string
         }
     </script>
     <script type="text/babel">
-        let caja = <CajaRango valor={4} max={100} min={0} valorOk={5} classOK="valido" classNoOk="invalido"/>
+        let caja = <CajaRangoCirculo valor={4} max={100} min={0} valorOk={5} classOK="valido" classNoOk="invalido" formato="estiloCirculo"/>
         var root = ReactDOM.createRoot(document.getElementById("zona"))
         root.render(caja)
     </script>
@@ -144,6 +163,8 @@
             <li><a href="../modulo3/004.html">3/004</a></li>
             <li><a href="../modulo3/005.html">3/005</a></li>
             <li><a href="../modulo3/006.html">3/006</a></li>
+            <li><a href="../modulo3/007.html">3/007</a></li>
+            <li><a href="../modulo3/008.html">3/008</a></li>
         </ul>
     </div>
     <div id="quitarfloat"></div>
