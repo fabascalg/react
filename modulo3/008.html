@@ -122,9 +122,9 @@
             }
             render() {
                 return <div>
-                    {this.dibujarCirculos()}
-                    <span className={this.estilo()}>{this.state.valor}</span>
                     <Botonera onMas = {this.incrementar} onMenos = {this.decrementar}/>
+                    <span className={this.estilo()}>&nbsp;{this.state.valor}&nbsp;</span>
+                    {this.dibujarCirculos()}
                 </div>
             }
         }
