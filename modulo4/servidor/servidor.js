@@ -11,7 +11,14 @@ alumnos.push({"nombre":"pepe",nota:5},{"nombre":"ana",nota:7});
 app.get("/alumnos", (req,res) => {
   res.send(alumnos)
 } )
-
+app.delete("/Alumnos",(req,res)=>{
+  let seleccionado = alumnos.filter(function(elemento){
+    return elemento.nombre == req.params.nombre
+  })[0];
+  let indice = alumnos.indexOf(seleccionado)
+  alumnos.splice(indice,1)
+  res.status(204).send()
+})
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
