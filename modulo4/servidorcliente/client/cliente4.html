@@ -53,6 +53,11 @@
             color: red
         }
 
+        #cajaformulario {
+            padding-top: 20px;
+            padding-left: 5px;
+        }
+
         .estiloCirculo {
             height: 20px;
             width: 20px;
@@ -87,10 +92,10 @@
 
             constructor(props) {
                 super(props);
-                this.borrar=this.borrar.bind(this)
+                this.borrar = this.borrar.bind(this)
             }
 
-            borrar(){
+            borrar() {
                 //console.log("has borrado")
                 console.log("desde el botón se ha iniciado el borrado")
                 this.props.onBorrar(this.props.alumno)
@@ -127,8 +132,8 @@
                 });
 
             }
-            borrar(alumno){
-                axios.delete(`http://localhost:3000/alumnos/${alumno.nombre}`).then((a)=>{
+            borrar(alumno) {
+                axios.delete(`http://localhost:3000/alumnos/${alumno.nombre}`).then((a) => {
                     console.log("desde la fila se ha borrado");
                 })
             }
@@ -143,9 +148,38 @@
 
             }
         }
+        class Formulario extends React.Component {
+            constructor(props) {
+                super(props)
+                this.state = {
+                    nombre: "",
+                    nota: 0
+                }
+                this.actualizarNombre=this.actualizarNombre.bind(this)
+                this.actualizarNota=this.actualizarNota.bind(this)
+            }
+
+            actualizarNombre(e){
+                console.log(e.target.value)
+            }
+
+            actualizarNota(e) {
+                console.log(e.target.value)
+            }
+
+            render() {
+                return <div id="cajaformulario">
+                    <form>
+                        <p><label for="nombre">Nombre: </label><input type="text" name="nombre" id="nombre" value={this.state.nombre} onChange={this.actualizarNombre()} /></p>
+                        <p><label for="nota">Nota: </label><input type="number" name="nota" id="nota" value={this.state.nota} onChange={this.actualizarNota()}/></p>
+                        <p><input type="button" value="insertar" /></p>
+                    </form>
+                </div>
+            }
+        }
     </script>
     <script type="text/babel">
-        let tabla = <div><ListaAlumnos /></div>
+        let tabla = <div><ListaAlumnos /><Formulario /></div>
         var root = ReactDOM.createRoot(document.getElementById("zona"))
         root.render(tabla)
     </script>
