@@ -92,38 +92,42 @@
 
             constructor(props) {
                 super(props);
-                this.borrar = this.borrar.bind(this)
+                this.borrar = this.borrar.bind(this);
             }
 
             borrar() {
-                //console.log("has borrado")
-                console.log("desde el botón se ha iniciado el borrado")
-                this.props.onBorrar(this.props.alumno)
+
+
+                console.log("desde la fila" + this.props.alumno)
+
+                this.props.onBorrar(this.props.alumno);
+
             }
 
             render() {
                 return <tr>
                     <td>{this.props.alumno.nombre}</td>
                     <td>{this.props.alumno.nota}</td>
-                    <td><input type="button" value="borrar" onClick={this.borrar}></input></td>
+                    <td><input type="button" value="borrar" onClick={this.borrar} /></td>
                 </tr>
             }
 
         }
-        class ListaAlumnos extends React.Component {
+        class ListaAlumnnos extends React.Component {
 
             constructor(props) {
                 super(props);
                 this.state = {
                     alumnos: []
                 }
+                this.borrar = this.borrar.bind(this);
             }
             componentDidMount() {
 
                 axios.get("http://localhost:3000/alumnos").then((datos) => {
                     // cargo la lista de alumnos y por lo tanto
                     // no me hace falta como propiedad
-                    //console.log(datos);
+                    console.log(datos);
                     this.setState({
                         alumnos: datos
 
@@ -134,8 +138,17 @@
             }
             borrar(alumno) {
                 axios.delete(`http://localhost:3000/alumnos/${alumno.nombre}`).then((a) => {
-                    console.log("desde la fila se ha borrado");
+
+                    console.log(" desde la lista se ha borrado");
+                    // una vez hemos borrado quiero recargar la lista
+                    return axios.get("http://localhost:3000/alumnos");
+                }).then((datos) => {
+                    this.setState({
+                        alumnos: datos
+                    })
+
                 })
+
             }
 
             render() {
@@ -149,37 +162,66 @@
             }
         }
         class Formulario extends React.Component {
+
             constructor(props) {
-                super(props)
+                super(props);
                 this.state = {
+
                     nombre: "",
                     nota: 0
                 }
-                this.actualizarNombre=this.actualizarNombre.bind(this)
-                this.actualizarNota=this.actualizarNota.bind(this)
-            }
+                this.actualizarNombre = this.actualizarNombre.bind(this);
+                this.actualizarNota = this.actualizarNota.bind(this);
+                this.insertar = this.insertar.bind(this);
 
-            actualizarNombre(e){
-                console.log(e.target.value)
+
+            }
+            // se estan lanzando desde los input de texto
+            actualizarNombre(e) {
+
+                console.log(e.target.value);
+                this.setState({ nombre: e.target.value });
             }
 
             actualizarNota(e) {
-                console.log(e.target.value)
+                console.log(e.target.value);
+                this.setState({ nota: e.target.value });
             }
 
+            insertar() {
+
+                axios.post("http://localhost:3000/alumnos", this.state).then(() => {
+
+                    return axios.get("http://localhost:3000/alumnos");
+
+                }).then((alumnos) => {
+                    // todo tiene un limite
+                    console.log(alumnos);
+                })
+
+            }
+
+
             render() {
-                return <div id="cajaformulario">
-                    <form>
-                        <p><label for="nombre">Nombre: </label><input type="text" name="nombre" id="nombre" value={this.state.nombre} onChange={this.actualizarNombre()} /></p>
-                        <p><label for="nota">Nota: </label><input type="number" name="nota" id="nota" value={this.state.nota} onChange={this.actualizarNota()}/></p>
-                        <p><input type="button" value="insertar" /></p>
-                    </form>
-                </div>
+                return <form>
+                    <p>
+                        Nombre:<input type="text" name="nombre" value={this.state.nombre} onChange={this.actualizarNombre} />
+                    </p>
+                    <p>
+                        Nota:<input type="text" name="nota" value={this.state.nota} onChange={this.actualizarNota} />
+                    </p>
+                    <p>
+                        <input type="button" value="insertar" onClick={this.insertar} />
+                    </p>
+                </form>
+
             }
         }
+
+
     </script>
     <script type="text/babel">
-        let tabla = <div><ListaAlumnos /><Formulario /></div>
+        let tabla = <div><ListaAlumnnos /><Formulario /></div>
         var root = ReactDOM.createRoot(document.getElementById("zona"))
         root.render(tabla)
     </script>

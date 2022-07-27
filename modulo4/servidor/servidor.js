@@ -1,10 +1,11 @@
 const express = require('express')
 const app = express()
+const bodyParser=require("body-parser");
 const port = 3000
 // activar CORS cross origin request sharing
 var cors = require('cors')
 app.use(cors())
-
+app.use(bodyParser.json())
 // creamos una lista de alumnos
 let alumnos=[];
 alumnos.push({"nombre":"pepe",nota:5},{"nombre":"ana",nota:7});
