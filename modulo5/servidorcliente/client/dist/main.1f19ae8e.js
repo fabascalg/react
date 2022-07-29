@@ -37676,7 +37676,7 @@ var ListaAlumnnos = /*#__PURE__*/function (_React$Component) {
         console.log(datos);
 
         _this2.setState({
-          alumnos: datos
+          alumnos: datos.data
         });
       });
     }
@@ -37877,7 +37877,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58481" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62218" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

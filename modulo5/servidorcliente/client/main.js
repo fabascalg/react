@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React,{Component} from "react"
 import ReactDOM from "react-dom/client"
 import {ListaAlumnnos} from "./listaalumno.js"
 import {FormularioAlumno} from "./formularioalumno.js"

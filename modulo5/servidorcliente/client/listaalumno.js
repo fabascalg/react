@@ -18,7 +18,7 @@ export class ListaAlumnnos extends React.Component {
             // no me hace falta como propiedad
             console.log(datos);
             this.setState({
-                alumnos: datos
+                alumnos: datos.data
 
             });
 
