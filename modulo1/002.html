@@ -5,36 +5,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>React mod1/002/</title>
+    <title>Introducción a React mod1/002/</title>
     <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
     <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+    <link rel="stylesheet" href="../normalize.css" />
+    <link rel="stylesheet" href="../estilos.css" />
     <script>
         window.onload = function () {
             document.getElementById('encabezado').innerText = document.title;
         }
     </script>
-    <style type="text/css">
-        body {
-            background-color: antiquewhite;
-        }
-
-        #encabezado {
-            text-align: center;
-            font-size: large;
-            color: blue;
-        }
-        #menu li{
-            float: left;
-            display:block;
-            width: 50px;
-            background-color: blanchedalmond;
-            margin-left: 2px;
-
-        }
-        #quitarfloat{
-            float:none;
-        }
-    </style>
 </head>
 
 <body>
@@ -46,10 +26,10 @@
     <script type="text/javascript">
         var estilo = {
             style: {
-                color: "blue"
+                color: "red"
             }
         }
-        var componente = React.createElement("p", estilo, "¡hola Reac!")
+        var componente = React.createElement("p", estilo, "¡hola Reac (color rojo)!")
         var root = ReactDOM.createRoot(document.getElementById("zona"))
         root.render(componente)
     </script>

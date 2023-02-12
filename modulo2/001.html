@@ -9,38 +9,13 @@
     <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
     <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" href="../normalize.css" />
+    <link rel="stylesheet" href="../estilos.css" />
     <script>
         window.onload = function () {
             document.getElementById('encabezado').innerText = document.title;
         }
     </script>
-    <style type="text/css">
-        body {
-            background-color: antiquewhite;
-        }
-
-        #encabezado {
-            text-align: center;
-            font-size: large;
-            color: blue;
-        }
-        #menu li{
-            float: left;
-            display:block;
-            width: 50px;
-            background-color: blanchedalmond;
-            margin-left: 2px;
-
-        }
-        #quitarfloat{
-            float:none;
-        }
-
-        .estiloLista{
-            color: green;
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
-        }        
-    </style>
 </head>
 
 <body>
@@ -51,7 +26,7 @@
     <script type="text/babel">
         class Lista extends React.Component {
             render() {
-                return <ul className='estiloLista'>
+                return <ul className="estiloListasDos">
                     <li>{this.props.item1}</li>
                     <li>{this.props.item2}</li>
                 </ul>
@@ -59,7 +34,7 @@
         }
     </script>
     <script type="text/babel">
-        var listas=<div><Lista item1="hola" item2="que"/><Lista item1="tal" item2="estas"/></div>
+        var listas = <div><Lista item1="hola" item2="que" /><Lista item1="tal" item2="estas" /></div>
         var root = ReactDOM.createRoot(document.getElementById("zona"))
         root.render(listas)
     </script>

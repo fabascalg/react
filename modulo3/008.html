@@ -7,59 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>React mod3/008/</title>
     <script src="https://unpkg.com/react@18.2.0/umd/react.development.js"></script>
-    <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/prop-types@15.8.1/prop-types.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+    <link rel="stylesheet" href="../normalize.css" />
+    <link rel="stylesheet" href="../estilos.css" />
     <script>
         window.onload = function () {
             document.getElementById('encabezado').innerText = document.title;
         }
     </script>
-    <style type="text/css">
-        body {
-            background-color: antiquewhite;
-        }
 
-        #encabezado {
-            text-align: center;
-            font-size: large;
-            color: blue;
-        }
-
-        #menu li {
-            float: left;
-            display: block;
-            width: 50px;
-            background-color: blanchedalmond;
-            margin-left: 2px;
-
-        }
-
-        #quitarfloat {
-            float: none;
-        }
-
-        .estiloLista {
-            color: coral;
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
-        }
-        .valido{
-            color:green
-        }
-        .invalido{
-            color:red
-        }
-        .estiloCirculo{
-            height: 20px;
-            width: 20px;
-            background-color: green;
-            border-radius: 50%;
-            display: inline-block;
-            border: 0px;
-            margin: 0px;
-            margin-left: 5px;
-        }
-    </style>
 </head>
 
 <body>
@@ -68,78 +26,88 @@
         <p>zona cero</p>
     </div>
     <script type="text/babel">
-        class Botonera extends React.Component{
-            constructor(props){
+        class Botonera extends React.Component {
+            constructor(props) {
                 super(props)
             }
-            render(){
+            render() {
 
-                return<span>
-                    <input type="button" value="+" onClick={this.props.onMas}/>
-                    <input type="button" value="-" onClick={this.props.onMenos}/>
-                    </span>
+                return <span>
+                    <input type="button" value="+" onClick={this.props.onMas} />
+                    <input type="button" value="-" onClick={this.props.onMenos} />
+                </span>
             }
         }
-        Botonera.propTypes={
-            onMas:PropTypes.func.isRequired,
-            onMenos:PropTypes.func.isRequired
+        Botonera.propTypes = {
+            onMas: PropTypes.func.isRequired,
+            onMenos: PropTypes.func.isRequired
         }
         class CajaRangoCirculo extends React.Component {
             constructor(props) {
                 super(props)
                 this.state = {
-                    valor:4
+                    valor: 4
                 }
-                this.incrementar=this.incrementar.bind(this)
-                this.decrementar=this.decrementar.bind(this)
-                this.estilo=this.estilo.bind(this)
-
+                this.incrementar = this.incrementar.bind(this)
+                this.decrementar = this.decrementar.bind(this)
+                this.estilo = this.estilo.bind(this)
             }
-            dibujarCirculos(){
-                let circulos=[];
-                for (let i=0;i<this.state.valor;i++){
-                    circulos.push(<span key={i} className={this.props.formato}>&nbsp;</span>);
+            dibujarCirculos() {
+                let circulos = [];
+                for (let i = 0; i < this.state.valor; i++) {
+                    if (this.state.valor>=this.props.valorOk)
+                        circulos.push(<span key={i} className="estiloCirculoVerde">&nbsp;</span>);
+                    else
+                    circulos.push(<span key={i} className="estiloCirculoRojo">&nbsp;</span>);
                 }
                 return circulos;
             }
-            incrementar(){
-                this.setState({
-                    valor: this.state.valor+1
-                })
+            incrementar() {
+                if (this.state.valor < this.props.max)
+                    this.setState({
+                        valor: this.state.valor + 1
+                    })
             }
-            decrementar(){
-                this.setState({
-                    valor: this.state.valor-1
-                })
+            decrementar() {
+                if (this.state.valor > this.props.min)
+                    this.setState({
+                        valor: this.state.valor - 1
+                    })
             }
-            estilo(){
-                if (this.state.valor>=this.props.valorOk){
+            estilo() {
+                if (this.state.valor >= this.props.valorOk) {
                     return this.props.classOk
                 } else {
                     return this.props.classNoOk
                 }
-
+            }
+            estilo2(){
+                if (this.state.valor >= this.props.valorOk){
+                    return "estiloCirculoVerde"
+                } else{
+                    return "estiloCirculoRojo"
+                }
             }
             render() {
-                return <div>
-                    <Botonera onMas = {this.incrementar} onMenos = {this.decrementar}/>
+                return <div id="panel">
+                    <Botonera onMas={this.incrementar} onMenos={this.decrementar} />
                     <span className={this.estilo()}>&nbsp;{this.state.valor}&nbsp;</span>
-                    {this.dibujarCirculos()}
+                    <span>max:  {this.props.max} &nbsp;min: {this.props.min}&nbsp;</span>
+                    <span className="{this.estilo2()}">{this.dibujarCirculos()}</span>
                 </div>
             }
         }
-        CajaRangoCirculo.propTypes={
+        CajaRangoCirculo.propTypes = {
             valor: PropTypes.number.isRequired,
             max: PropTypes.number.isRequired,
             min: PropTypes.number.isRequired,
             valorOk: PropTypes.number,
             classOK: PropTypes.string,
-            classNoOk: PropTypes.string,
-            formato: PropTypes.string
+            classNoOk: PropTypes.string
         }
     </script>
     <script type="text/babel">
-        let caja = <CajaRangoCirculo valor={4} max={100} min={0} valorOk={5} classOK="valido" classNoOk="invalido" formato="estiloCirculo"/>
+        let caja = <CajaRangoCirculo valor={4} max={30} min={0} valorOk={5} classOK="valido" classNoOk="invalido"/>
         var root = ReactDOM.createRoot(document.getElementById("zona"))
         root.render(caja)
     </script>

@@ -9,38 +9,13 @@
     <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
     <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" href="../normalize.css" />
+    <link rel="stylesheet" href="../estilos.css" />
     <script>
         window.onload = function () {
             document.getElementById('encabezado').innerText = document.title;
         }
     </script>
-    <style type="text/css">
-        body {
-            background-color: antiquewhite;
-        }
-
-        #encabezado {
-            text-align: center;
-            font-size: large;
-            color: blue;
-        }
-        #menu li{
-            float: left;
-            display:block;
-            width: 50px;
-            background-color: blanchedalmond;
-            margin-left: 2px;
-
-        }
-        #quitarfloat{
-            float:none;
-        }
-
-        .estiloLista{
-            color:coral;
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
-        }        
-    </style>
 </head>
 
 <body>
@@ -50,22 +25,23 @@
     </div>
     <script type="text/babel">
         class Alumno {
-            constructor(nombre,nota){
+            constructor(nombre, nota) {
                 this.nombre = nombre
                 this.nota = nota
             }
         }
 
-        class Fila extends React.Component{
-            render(){
+        class Fila extends React.Component {
+            render() {
                 // funcionaba lo siguiente si en lísta lo que se recibe se llama alumno, 
                 // me refiero a lo que componente Lista envía... ojo, donde ahora dice item={item}
                 //-> return <li>{this.props.alumno.nombre}, {this.props.alumno.nota}</li>
                 // hacer génerica la respuesta recorriendo propiedades de objeto
                 let objeto = this.props.item;
-                let plantilla=``;
-                for (let propiedad in objeto){
-                    plantilla+=`${objeto[propiedad]},`;
+                let plantilla = ``;
+                for (let propiedad in objeto) {
+                    if (plantilla.length > 0) plantilla += ', ';
+                    plantilla += `${objeto[propiedad]}`;
                 }
                 return <li>{plantilla}</li>
 
@@ -73,16 +49,16 @@
         }
         class Lista extends React.Component {
             render() {
-                return <ul>
-                    {this.props.items.map((item)=><Fila key={item.nombre} item={item}/>)}
+                return <ul className="estiloListasDos">
+                    {this.props.items.map((item) => <Fila key={item.nombre} item={item} />)}
                 </ul>
             }
         }
     </script>
     <script type="text/babel">
-        let a1 = new Alumno("Pedro",10);
-        let a2 = new Alumno("Gloria",3);
-        let lista = [a1,a2];
+        let a1 = new Alumno("Pedro", 10);
+        let a2 = new Alumno("Gloria", 3);
+        let lista = [a1, a2];
 
         var listas = <div>
             <Lista items={lista} />

@@ -9,38 +9,13 @@
     <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
     <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" href="../normalize.css" />
+    <link rel="stylesheet" href="../estilos.css" />
     <script>
         window.onload = function () {
             document.getElementById('encabezado').innerText = document.title;
         }
     </script>
-    <style type="text/css">
-        body {
-            background-color: antiquewhite;
-        }
-
-        #encabezado {
-            text-align: center;
-            font-size: large;
-            color: blue;
-        }
-        #menu li{
-            float: left;
-            display:block;
-            width: 50px;
-            background-color: blanchedalmond;
-            margin-left: 2px;
-
-        }
-        #quitarfloat{
-            float:none;
-        }
-
-        .estiloLista{
-            color:coral;
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
-        }        
-    </style>
 </head>
 
 <body>
@@ -49,14 +24,26 @@
         <p>zona cero</p>
     </div>
     <script type="text/babel">
-        var mensajes=['hola1','hola2','hola3','hola4']
+        // array a tratar
+        var mensajes=['lunes','martes','miércoles','jueves','viernes','sábado','domingo'];
+
+        /*
+        renderiza cada list item recibiendo 'texto' ...
+        */
+        class Fila extends React.Component{
+            render(){
+                return <li>{this.props.texto}</li>
+            }
+        }
+        // renderiza la lista recorriendo el array con 'map' y creando una instancia por cada item pasando 'item' ...
         class Lista extends React.Component {
             render() {
-                return <ul className='estiloLista'>
-                    {this.props.items.map((item)=><li key={item}>{item}</li>)}
+                return <ul className="estiloListasDos">
+                    {this.props.items.map((item)=><Fila key={item} texto={item} />)}
                 </ul>
             }
         }
+
     </script>
     <script type="text/babel">
         var listas=<Lista items={mensajes} />

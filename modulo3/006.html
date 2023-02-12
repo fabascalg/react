@@ -7,49 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>React mod3/006/</title>
     <script src="https://unpkg.com/react@18.2.0/umd/react.development.js"></script>
-    <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/prop-types@15.8.1/prop-types.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+    <link rel="stylesheet" href="../normalize.css" />
+    <link rel="stylesheet" href="../estilos.css" />
     <script>
         window.onload = function () {
             document.getElementById('encabezado').innerText = document.title;
         }
     </script>
-    <style type="text/css">
-        body {
-            background-color: antiquewhite;
-        }
-
-        #encabezado {
-            text-align: center;
-            font-size: large;
-            color: blue;
-        }
-
-        #menu li {
-            float: left;
-            display: block;
-            width: 50px;
-            background-color: blanchedalmond;
-            margin-left: 2px;
-
-        }
-
-        #quitarfloat {
-            float: none;
-        }
-
-        .estiloLista {
-            color: coral;
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
-        }
-        .valido{
-            color:green
-        }
-        .invalido{
-            color:red
-        }
-    </style>
 </head>
 
 <body>
@@ -62,40 +29,41 @@
             constructor(props) {
                 super(props)
                 this.state = {
-                    valor:4
+                    valor: this.props.valor
                 }
-                this.incrementar=this.incrementar.bind(this)
-                this.decrementar=this.decrementar.bind(this)
-                this.estilo=this.estilo.bind(this)
-
+                this.incrementar = this.incrementar.bind(this)
+                this.decrementar = this.decrementar.bind(this)
+                this.estilo = this.estilo.bind(this)
             }
-            incrementar(){
-                this.setState({
-                    valor: this.state.valor+1
-                })
+            incrementar() {
+                if (this.state.valor < this.props.max)
+                    this.setState({
+                        valor: this.state.valor + 1
+                    })
             }
-            decrementar(){
-                this.setState({
-                    valor: this.state.valor-1
-                })
+            decrementar() {
+                if (this.state.valor > this.props.min)
+                    this.setState({
+                        valor: this.state.valor - 1
+                    })
             }
-            estilo(){
-                if (this.state.valor>=this.props.valorOk){
+            estilo() {
+                if (this.state.valor >= this.props.valorOk) {
                     return this.props.classOk
                 } else {
                     return this.props.classNoOk
                 }
-
             }
             render() {
-                return <div>
-                    <span className={this.estilo()}>{this.state.valor}</span>
-                    <input type="button" value="+" onClick={this.incrementar}/>
-                    <input type="button" value="-" onClick={this.decrementar}/>
+                return <div id="panel">
+                    <span className={this.estilo()}>valor: {this.state.valor} </span>
+                    <span>&nbsp;max:{this.props.max}&nbsp;mín:{this.props.min}&nbsp;&nbsp;</span>
+                    <input type="button" value="+" onClick={this.incrementar} />
+                    <input type="button" value="-" onClick={this.decrementar} />
                 </div>
             }
         }
-        CajaRango.propTypes={
+        CajaRango.propTypes = {
             valor: PropTypes.number.isRequired,
             max: PropTypes.number.isRequired,
             min: PropTypes.number.isRequired,
@@ -105,7 +73,7 @@
         }
     </script>
     <script type="text/babel">
-        let caja = <CajaRango valor={4} max={100} min={0} valorOk={5} classOK="valido" classNoOk="invalido"/>
+        let caja = <CajaRango valor={4} max={30} min={0} valorOk={5} classOk="valido" classNoOk="invalido" />
         var root = ReactDOM.createRoot(document.getElementById("zona"))
         root.render(caja)
     </script>

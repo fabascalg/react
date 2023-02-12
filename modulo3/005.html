@@ -7,43 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>React mod3/005/</title>
     <script src="https://unpkg.com/react@18.2.0/umd/react.development.js"></script>
-    <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/prop-types@15.8.1/prop-types.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+    <link rel="stylesheet" href="../normalize.css" />
+    <link rel="stylesheet" href="../estilos.css" />
     <script>
         window.onload = function () {
             document.getElementById('encabezado').innerText = document.title;
         }
     </script>
-    <style type="text/css">
-        body {
-            background-color: antiquewhite;
-        }
-
-        #encabezado {
-            text-align: center;
-            font-size: large;
-            color: blue;
-        }
-
-        #menu li {
-            float: left;
-            display: block;
-            width: 50px;
-            background-color: blanchedalmond;
-            margin-left: 2px;
-
-        }
-
-        #quitarfloat {
-            float: none;
-        }
-
-        .estiloLista {
-            color: coral;
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
-        }
-    </style>
 </head>
 
 <body>
@@ -56,45 +29,47 @@
             constructor(props) {
                 super(props)
                 this.state = {
-                    valor:4
-
+                    valor: 5,
+                    max: 100,
+                    min: 0
                 }
-                this.incrementar=this.incrementar.bind(this)
-                this.decrementar=this.decrementar.bind(this)
-                this.incrementarPorSegundo=this.incrementarPorSegundo.bind(this)
-
+                this.incrementar = this.incrementar.bind(this)
+                this.decrementar = this.decrementar.bind(this)
+                this.incrementarPorSegundo = this.incrementarPorSegundo.bind(this)
             }
-            incrementarPorSegundo(){
+            incrementarPorSegundo() {
                 this.setState({
-                    valor: this.state.valor+1
+                    valor: this.state.valor + 1
                 })
             }
-            incrementar(){
+            incrementar() {
+                if (this.state.valor<this.state.max)
                 this.setState({
-                    valor: this.state.valor+1
+                        valor: this.state.valor + 1
                 })
             }
-            decrementar(){
+            decrementar() {
+                if (this.state.valor>this.state.min)
                 this.setState({
-                    valor: this.state.valor-1
+                        valor: this.state.valor - 1
                 })
             }
             /*componentDidMount(){
                 setInterval(this.incrementarPorSegundo,1000);
             }*/
             render() {
-                return <div>
-                    <span>{this.state.valor}</span>
-
-                    <input type="button" value="+" onClick={this.incrementar}/>
-                    <input type="button" value="-" onClick={this.decrementar}/>
+                return <div id="panel">
+                    <span>valor:{this.state.valor}&nbsp;&nbsp;max:{this.state.max}&nbsp;&nbsp;min:{this.state.min}&nbsp;&nbsp;</span>
+                    <input type="button" value="+" onClick={this.incrementar} />
+                    <input type="button" value="-" onClick={this.decrementar} />
+                    <span> botones funcionan... y límites máximo y mínimo controlado (hay una ambigüedad, la etiqueta que renderiza el componente, no carga los valors recibidos...</span>
                 </div>
             }
         }
-        CajaRango.propTypes={
-            valor:PropTypes.number.isRequired,
-            max:PropTypes.number.isRequired,
-            min:PropTypes.number.isRequired
+        CajaRango.propTypes = {
+            valor: PropTypes.number.isRequired,
+            max: PropTypes.number.isRequired,
+            min: PropTypes.number.isRequired
         }
     </script>
     <script type="text/babel">

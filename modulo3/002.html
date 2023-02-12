@@ -9,40 +9,13 @@
     <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
     <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" href="../normalize.css" />
+    <link rel="stylesheet" href="../estilos.css" />    
     <script>
         window.onload = function () {
             document.getElementById('encabezado').innerText = document.title;
         }
     </script>
-    <style type="text/css">
-        body {
-            background-color: antiquewhite;
-        }
-
-        #encabezado {
-            text-align: center;
-            font-size: large;
-            color: blue;
-        }
-
-        #menu li {
-            float: left;
-            display: block;
-            width: 50px;
-            background-color: blanchedalmond;
-            margin-left: 2px;
-
-        }
-
-        #quitarfloat {
-            float: none;
-        }
-
-        .estiloLista {
-            color: coral;
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
-        }
-    </style>
 </head>
 
 <body>
@@ -57,9 +30,11 @@
                 this.state = {
                     valor:4
                 }
+                // bind obliga a que las funciones, que tienen su propio ámbito y que por tanto no reconocen el 
+                // estado 'valor' de la clase, reconozcan las variables de estado de la clase... ahora sí se verá afectado 
+                // el estado valor al ejecutar la funciones incrementar y decrementar...
                 this.incrementar=this.incrementar.bind(this)
                 this.decrementar=this.decrementar.bind(this)
-
             }
             incrementar(){
                 this.setState({
@@ -72,11 +47,11 @@
                 })
             }
             render() {
-                return <div>
+                return <div id="panel">
                     <span>{this.state.valor}</span>
-
                     <input type="button" value="+" onClick={this.incrementar}/>
                     <input type="button" value="-" onClick={this.decrementar}/>
+                    <span> botones funcionan... ahora se trabaja con state, ahí se estable valor en 4 al empezar y después se hace que las funcionen puedan actuar sobre el mismo...</span>                    
                 </div>
             }
         }

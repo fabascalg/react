@@ -9,40 +9,13 @@
     <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
     <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" href="../normalize.css" />
+    <link rel="stylesheet" href="../estilos.css" />
     <script>
         window.onload = function () {
             document.getElementById('encabezado').innerText = document.title;
         }
     </script>
-    <style type="text/css">
-        body {
-            background-color: antiquewhite;
-        }
-
-        #encabezado {
-            text-align: center;
-            font-size: large;
-            color: blue;
-        }
-
-        #menu li {
-            float: left;
-            display: block;
-            width: 50px;
-            background-color: blanchedalmond;
-            margin-left: 2px;
-
-        }
-
-        #quitarfloat {
-            float: none;
-        }
-
-        .estiloLista {
-            color: coral;
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
-        }
-    </style>
 </head>
 
 <body>
@@ -73,7 +46,8 @@
                 let objeto = this.props.item;
                 let plantilla = ``;
                 for (let propiedad in objeto) {
-                    plantilla += `${objeto[propiedad]}, `;
+                    if (plantilla.length>0) plantilla+=', '
+                    plantilla += `${objeto[propiedad]}`;
                 }
                 plantilla = plantilla.substr(0, plantilla.length - 2);
                 return <li>{plantilla}</li>
@@ -82,7 +56,7 @@
         }
         class Lista extends React.Component {
             render() {
-                return <ul>
+                return <ul className="estiloListasDos">
                     {this.props.items.map((item, i) => <Fila key={i} item={item} />)}
                 </ul>
             }
@@ -91,11 +65,15 @@
     <script type="text/babel">
         let a1 = new Alumno("Pedro", 10);
         let a2 = new Alumno("Gloria", 3);
-        let lista = [a1, a2];
+        let a3 = new Alumno("Begoña", 9);
+        let a4 = new Alumno("Virginia", 7.5);
+        let lista = [a1, a2, a3, a4];
 
-        let f1 = new Factura(1,'smartphone',1000);
-        let f2 = new Factura(2,'TV Oled',1500);
-        let lista2 = [f1, f2];        
+        let f1 = new Factura(1, 'smartphone', 1000);
+        let f2 = new Factura(2, 'TV Oled', 1500);
+        let f3 = new Factura(3, 'máscara de buceo con cámara', 330);
+        let f4 = new Factura(4, 'aletas con hélices', 450.3);
+        let lista2 = [f1, f2, f3, f4];
 
         var listas = <div>
             <Lista items={lista} />

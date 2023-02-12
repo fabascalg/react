@@ -5,36 +5,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>React mod1/001/</title>
+    <title>Introducción a React mod1/001/ </title>
     <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
     <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+    <link rel="stylesheet" href="../normalize.css" />
+    <link rel="stylesheet" href="../estilos.css" />
     <script>
         window.onload = function () {
             document.getElementById('encabezado').innerText = document.title;
         }
     </script>
-    <style type="text/css">
-        body {
-            background-color: antiquewhite;
-        }
-
-        #encabezado {
-            text-align: center;
-            font-size: large;
-            color: blue;
-        }
-        #menu li {
-            float: left;
-            display:block;
-            width: 50px;
-            background-color: blanchedalmond;
-            margin-left: 2px;
-
-        }
-        #quitarfloat {
-            float:none;
-        }
-    </style>
 </head>
 
 <body>
@@ -43,12 +23,12 @@
         <p>zona cero</p>
     </div>
     <script type="text/javascript">
-        var componente = React.createElement("p", null, "¡hola Reac!")
+        var componente = React.createElement("p", null, "¡hola Reac (repaso 1)!")
         var root = ReactDOM.createRoot(document.getElementById("zona"))
         root.render(componente)
     </script>
     <div id='abajo'>
-        <ul id="menu">
+        <ul id="menu" className="estilolista">
             <li><a href="../modulo1/001.html">1/001</a></li>
             <li><a href="../modulo1/002.html">1/002</a></li>
             <li><a href="../modulo1/003.html">1/003</a></li>
@@ -69,7 +49,19 @@
             <li><a href="../modulo3/006.html">3/006</a></li>
         </ul>
     </div>
-    <div id="quitarfloat"></div>
+    <div id="quitarfloat">
+        <div id="ejercicio">
+            <text>
+                Se comienza por aprender a incluir los scripts de React | Enlazamos con los scripts en internet de Unpkg para estas librerias: React, ReactDOM y Babel.<br />
+                El primero "React" crea el/los componentes.<br />
+                El segundo "ReactDOM" renderiza los componentes en los documentos HTML.<br />
+                El tercero "Babel" permite usar directamente lenguaje HTML (con algunas reglas) "dentro" de los Scripts en Javascript/Typescript.<br />
+                Ejercicio:<br />
+                En este caso se crea un componente, se enlaza en un elemento del DOM del HTML y finalmente se renderiza en él.<br />
+                Se hace en dos pasos, primero creando el componente sin Babel y después con Babel, que se utilizara de aquí en adelante.<br />
+            </text>
+        </div>
+    </div>
 </body>
 
 </html>
