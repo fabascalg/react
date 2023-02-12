@@ -11,74 +11,14 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://unpkg.com/prop-types@15.8.1/prop-types.js"></script>
     <script src="https://unpkg.com/axios@0.2.1/dist/axios.js"></script>
+    <link rel="stylesheet" href="https://github.com/necolas/normalize.css">
+    <link rel="stylesheet" href="css/estilos.css">
     <script>
         window.onload = function () {
             document.getElementById('encabezado').innerText = document.title;
         }
     </script>
-    <style type="text/css">
-        body {
-            background-color: antiquewhite;
-        }
 
-        #encabezado {
-            text-align: center;
-            font-size: large;
-            color: blue;
-        }
-
-        #menu li {
-            float: left;
-            display: block;
-            width: 50px;
-            background-color: blanchedalmond;
-            margin-left: 2px;
-
-        }
-
-        #quitarfloat {
-            float: none;
-        }
-
-        .estiloLista {
-            color: coral;
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
-        }
-
-        .valido {
-            color: green
-        }
-
-        .invalido {
-            color: red
-        }
-
-        #cajaformulario {
-            padding-top: 20px;
-            padding-left: 5px;
-        }
-
-        .estiloCirculo {
-            height: 20px;
-            width: 20px;
-            background-color: green;
-            border-radius: 50%;
-            display: inline-block;
-            border: 0px;
-            margin: 0px;
-            margin-left: 5px;
-        }
-
-        table td {
-            border: 1px solid grey;
-        }
-
-        table td,
-        table th {
-            padding-left: 5px;
-            padding-right: 2px;
-        }
-    </style>
 </head>
 
 <body>
@@ -154,6 +94,12 @@
             render() {
 
                 return <table>
+
+                    <thead>
+                        <th>Nombre</th>
+                        <th>Nota</th>
+                        <th>Acción</th>
+                    </thead>
                     <tbody>
                         {this.state.alumnos.map((alumno) => <FilaAlumno key={alumno.nombre} onBorrar={this.borrar} alumno={alumno} />)}
                     </tbody>
@@ -204,15 +150,12 @@
 
             render() {
                 return <form>
-                    <p>
-                        Nombre:<input type="text" name="nombre" value={this.state.nombre} onChange={this.actualizarNombre} />
-                    </p>
-                    <p>
-                        Nota:<input type="text" name="nota" value={this.state.nota} onChange={this.actualizarNota} />
-                    </p>
-                    <p>
-                        <input type="button" value="insertar" onClick={this.insertar} />
-                    </p>
+                    <br />
+                    Nombre:<input type="text" name="nombre" value={this.state.nombre} onChange={this.actualizarNombre} />
+                    <br />
+                    Nota:<input type="text" name="nota" value={this.state.nota} onChange={this.actualizarNota} />
+                    <br />
+                    <input type="button" value="insertar" onClick={this.insertar} />
                 </form>
 
             }
